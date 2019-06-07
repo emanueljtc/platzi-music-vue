@@ -1,0 +1,44 @@
+<template lang="pug">
+  .card(v-if="track && track.album")
+    .card-image
+      figure.image.is-1by1
+        img(:src="track.album.images[0].url")
+    .card-content
+      .media
+        .media-left
+          figure.image.is-48x48
+            img(:src="track.album.images[0].url")
+        .media-content
+          p.title.is-6
+            strong {{track.name}}
+          p.subtitle.is-6
+            | {{track.artists[0].name}}
+      .content
+        small {{track.duration_ms | ms-to-mm }}
+        nav.level.has-text-centered
+          .level-left
+            button.button.level-item.is-primary
+              span.icon.is-small(@click="selectedTrack") ⏯
+            button.button.level-item.is-warning
+              span.icon.is-small(@click="goToTrack(track.id)") 👁
+</template>
+<script>
+import trackMixin from "@/mixins/track";
+export default {
+  mixins: [trackMixin],
+  props: {
+    track: { type: Object, required: true }
+  },
+  methods: {
+    goToTrack(id) {
+      if (!this.track.preview_url) {
+        return;
+      }
+      // usando route para navegar por medio de codigo
+      this.$router.push({ name: "track", params: { id: id } });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+</style>
