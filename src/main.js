@@ -6,7 +6,7 @@ import eventBus from '@/puglins/event-bus';
 import msToMm from '@/filters/ms-to-mm';
 import blur from '@/directives/blur';
 import store from '@/store';
-import { i18n } from '@/vue-i18n';
+import i18n from '@/i18n';
 
 Vue.use(eventBus)
 Vue.use(VueRouter)
